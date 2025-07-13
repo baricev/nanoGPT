@@ -9,7 +9,7 @@
    ```bash
    python train.py config/train_shakespeare_char.py \
           --max_iters=10 --eval_interval=10 --compile=False
-````
+   ```
 
 2. Full (≈3 min on A100) Shakespeare training:
 
