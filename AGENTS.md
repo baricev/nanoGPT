@@ -1,0 +1,36 @@
+# nanoGPT – Agent Guide
+
+## Where to work
+* All source lives in the repository root (Python).
+* Data artefacts (train.bin / val.bin) created by `data/shakespeare_char/prepare.py`.
+
+## How to verify changes locally
+1. Run unit smoke test (≈10 iters):
+   ```bash
+   python train.py config/train_shakespeare_char.py \
+          --max_iters=10 --eval_interval=10 --compile=False
+````
+
+2. Full (≈3 min on A100) Shakespeare training:
+
+   ```bash
+   python train.py config/train_shakespeare_char.py
+   ```
+3. Sampling from best checkpoint:
+
+   ```bash
+   python sample.py --out_dir=out-shakespeare-char
+   ```
+
+## Contribution & style
+
+* Follow `black` (already in pre‑commit); run `black .` before committing.
+* Keep functions <80 lines; extract helpers into `utils.py` if needed.
+* Document any new CLI flag at the top of `train.py`.
+
+## Useful CLI snippets
+
+| Purpose                  | Command                                         |
+| ------------------------ | ----------------------------------------------- |
+| Profile one step         | `python bench.py`                               |
+| Convert checkpoint to HF | `python convert_checkpoint.py --out_dir export` |
