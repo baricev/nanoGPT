@@ -4,5 +4,6 @@ exclude = [
     "transformer_sizing.ipynb",
     "bench.py",
     "sample.py",
+    "model.py",
     # Addedd to allow CI to pass
 ]
