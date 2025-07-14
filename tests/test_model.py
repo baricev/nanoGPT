@@ -110,7 +110,6 @@ def test_attention_split_shapes():
     assert torch.allclose(y, y_manual, atol=1e-5)
 
 
-
 def test_query_projection_shapes():
     cfg = GPTConfig(n_embd=32, n_head=4)
     attn = CausalSelfAttention(cfg)
@@ -124,11 +123,11 @@ def test_query_projection_shapes():
     attn(x)
     h.remove()
     q, k, v = outputs["proj"].split(cfg.n_embd, dim=2)
-    assert q.shape ==  (2, 5, cfg.n_embd)
-
+    assert q.shape == (2, 5, cfg.n_embd)
 
     qh = q.view(2, 5, cfg.n_head, cfg.n_embd // cfg.n_head).transpose(1, 2)
-    assert qh.shape ==  (2, cfg.n_head, 5, cfg.n_embd // cfg.n_head)
+    assert qh.shape == (2, cfg.n_head, 5, cfg.n_embd // cfg.n_head)
+
 
 def test_layer_construction_shapes():
     cfg = GPTConfig(n_layer=2, n_head=2, n_embd=8, block_size=16, vocab_size=20)
@@ -140,7 +139,6 @@ def test_layer_construction_shapes():
     assert block.mlp.c_fc.weight.shape == (4 * cfg.n_embd, cfg.n_embd)
     assert model.transformer.wte.weight.shape == (cfg.vocab_size, cfg.n_embd)
     assert model.transformer.wpe.weight.shape == (cfg.block_size, cfg.n_embd)
-
 
 
 def test_pretrained_parameter_names_and_shapes():
