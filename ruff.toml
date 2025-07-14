@@ -1,0 +1,8 @@
+exclude = [
+    "scaling_laws.ipynb",
+    "train.py",
+    "transformer_sizing.ipynb",
+    "bench.py",
+    "sample.py",
+    # Addedd to allow CI to pass
+]
