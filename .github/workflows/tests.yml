@@ -32,7 +32,7 @@ jobs:
         run: pytest -v
       - name: Upload test artifacts
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: hf-cache
           path: ${{ env.HF_HOME }}
