@@ -20,12 +20,12 @@ jobs:
       - name: Pre-download GPT-2
         run: |
           python - <<'PY'
-from transformers import AutoTokenizer, AutoModelForCausalLM
-import os
-cache = os.environ['HF_HOME']
-AutoTokenizer.from_pretrained('openai-community/gpt2', cache_dir=cache)
-AutoModelForCausalLM.from_pretrained('openai-community/gpt2', cache_dir=cache)
-PY
+          from transformers import AutoTokenizer, AutoModelForCausalLM
+          import os
+          cache = os.environ['HF_HOME']
+          AutoTokenizer.from_pretrained('openai-community/gpt2', cache_dir=cache)
+          AutoModelForCausalLM.from_pretrained('openai-community/gpt2', cache_dir=cache)
+          PY
       - name: Prepare dataset
         run: python data/shakespeare_char/prepare.py
       - name: Run tests
