@@ -3,12 +3,14 @@
 ## Where to work
 * All source lives in the repository root (Python).
 * Data artefacts (train.bin / val.bin) created by `data/shakespeare_char/prepare.py`.
-
+* since we are running on CPU instead of GPU we must set both `--device=cpu`
+* and also turn off PyTorch 2.0 compile with `--compile=False`.
+  
 ## How to verify changes locally
 1. Run unit smoke test (≈10 iters):
    ```bash
-   python train.py config/train_shakespeare_char.py \
-          --max_iters=10 --eval_interval=10 --compile=False
+   python train.py config/train_shakespeare_char.py --device=cpu --compile=False --eval_iters=2 --log_interval=1 --block_size=64 --batch_size=12 --n_layer=4 --n_head=4 --n_embd=128 --max_iters=2 --lr_decay_iters=2000 --dropout=0.0
+
    ```
 
 2. Full (≈3 min on A100) Shakespeare training:
@@ -19,7 +21,7 @@
 3. Sampling from best checkpoint:
 
    ```bash
-   python sample.py --out_dir=out-shakespeare-char
+   python sample.py --out_dir=out-shakespeare-char --device=cpu
    ```
 
 ## Contribution & style
