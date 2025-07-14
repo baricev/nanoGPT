@@ -5,7 +5,8 @@ import numpy as np
 import torch
 from transformers import GPT2LMHeadModel
 import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from model import GPT
 import pytest
 
