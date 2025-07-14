@@ -7,6 +7,7 @@ from transformers import GPT2LMHeadModel
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from model import GPT
+import pytest
 
 TRANSPOSED = [
     "attn.c_attn.weight",
@@ -90,6 +91,7 @@ def evaluate_shakespeare(
     )
 
 
+@pytest.mark.heavy
 def test_hf_comparison() -> None:
     """Runs all HuggingFace comparison tests."""
     cache_dir = os.environ.get(

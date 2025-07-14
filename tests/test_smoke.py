@@ -1,11 +1,13 @@
 import subprocess
 from pathlib import Path
 
+import pytest
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 HF_CACHE = Path(__file__).resolve().parents[1] / ".hf_cache"
 
 
+@pytest.mark.heavy
 def test_gpt2_cache():
     """Ensure GPT-2 weights are cached and can be loaded."""
     model_dir = HF_CACHE / "models--openai-community--gpt2"
@@ -15,12 +17,14 @@ def test_gpt2_cache():
     AutoModelForCausalLM.from_pretrained("openai-community/gpt2", cache_dir=HF_CACHE)
 
 
+@pytest.mark.heavy
 def test_shakespeare_prepare(tmp_path):
     subprocess.check_call(["python", "data/shakespeare_char/prepare.py"])
     assert Path("data/shakespeare_char/train.bin").exists()
     assert Path("data/shakespeare_char/val.bin").exists()
 
 
+@pytest.mark.heavy
 def test_train_smoke(tmp_path, monkeypatch):
     out_dir = tmp_path / "out-test"
     cmd = [

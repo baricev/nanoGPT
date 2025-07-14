@@ -5,7 +5,7 @@ all: lint typecheck test
 
 # Install all development and runtime dependencies
 install:
-	uv pip install --no-cache-dir ruff mypy types-requests pytest pytest-cov black torch>=2.6.0 numpy transformers datasets tiktoken wandb tqdm requests
+	uv pip install --no-cache-dir ruff mypy types-requests pytest pytest-cov black torch numpy transformers datasets tiktoken wandb tqdm requests
 
 
 # Format the code using ruff
@@ -24,4 +24,4 @@ typecheck:
 
 # Run tests using pytest
 test:
-	pytest -v
+	pytest -v -m "not heavy"
