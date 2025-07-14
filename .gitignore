@@ -9,4 +9,7 @@ __pycache__/
 *.pyc
 input.txt
 env/
+.hf_cache/
 venv/
+
+wandb/

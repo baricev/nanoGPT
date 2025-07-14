@@ -1,0 +1,38 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    env:
+      HF_HOME: ${{ github.workspace }}/.hf_cache
+      WANDB_MODE: offline
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install --no-cache-dir torch numpy transformers datasets tiktoken wandb tqdm requests black pytest pytest-cov
+      - name: Pre-download GPT-2
+        run: |
+          python - <<'PY'
+from transformers import AutoTokenizer, AutoModelForCausalLM
+import os
+cache = os.environ['HF_HOME']
+AutoTokenizer.from_pretrained('openai-community/gpt2', cache_dir=cache)
+AutoModelForCausalLM.from_pretrained('openai-community/gpt2', cache_dir=cache)
+PY
+      - name: Prepare dataset
+        run: python data/shakespeare_char/prepare.py
+      - name: Run tests
+        run: pytest -v
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: hf-cache
+          path: ${{ env.HF_HOME }}
