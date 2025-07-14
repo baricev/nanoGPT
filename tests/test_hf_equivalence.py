@@ -6,7 +6,7 @@ from transformers import GPT2LMHeadModel
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from model import GPT
-from hf_compare import compare_state_dict, compare_forward
+from tests.test_hf_compare import compare_state_dict, compare_forward
 
 HF_CACHE = Path(__file__).resolve().parents[1] / ".hf_cache"
 

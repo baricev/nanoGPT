@@ -1,4 +1,8 @@
 pytest
 pytest-cov
 wandb
+numpy
+torch
+transformers
+sentencepiece
 
