@@ -1,7 +1,6 @@
 import subprocess
 from pathlib import Path
 
-import pytest
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 HF_CACHE = Path(__file__).resolve().parents[1] / ".hf_cache"

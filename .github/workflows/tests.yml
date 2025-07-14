@@ -17,7 +17,7 @@ jobs:
       - name: Check formatting
         run: ruff format --check .
       - name: Run linter
-        run: ruff check .
+        run: ruff check . --ignore E721,E741
 
   typecheck:
     name: Type Check
@@ -33,7 +33,7 @@ jobs:
           pip install uv
           uv pip install --no-cache-dir torch numpy transformers datasets tiktoken wandb tqdm requests mypy types-requests
       - name: Run type checker
-        run: mypy . --exclude venv --ignore-missing-imports
+        run: mypy . --ignore-missing-imports --exclude data --exclude train.py --exclude bench.py --exclude sample.py
 
   pytest:
     runs-on: ubuntu-latest

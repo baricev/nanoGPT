@@ -1,8 +1,6 @@
-import os
 import sys
 from pathlib import Path
 
-import torch
 from transformers import GPT2LMHeadModel
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))

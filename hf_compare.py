@@ -1,7 +1,6 @@
 """Compare nanoGPT's GPT-2 implementation with HuggingFace's reference."""
 
 import os
-import math
 import numpy as np
 import torch
 from transformers import GPT2LMHeadModel
